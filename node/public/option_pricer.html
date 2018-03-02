@@ -1,0 +1,31 @@
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.1.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/option_pricer.js"></script>
+<div ng-app="optionPricer" ng-controller="myCtrl" class="container">
+	<h2 class="title">Option Pricer Using Monte-Carlo Simulation</h1><hr>
+	
+	<p>This app creates {{num_tasks|number:0}} jobs with {{params.num_simulations|number:0}} simulations each (total {{num_tasks*params.num_simulations|number:0}} simulations) to price a call option. There are closed form, efficient solutions for option pricing. This simulation based pricing is only for illustration.</p>
+	<div class="row">
+		<div class="six columns">
+			<label>spot</label><input type="text" ng-model="params.spot"></input>
+			<label>strike</label><input type="text" ng-model="params.strike"></input>
+			<label>time to expiry</label><input type="text" ng-model="params.time"></input>
+			<label>interest rate</label><input type="text" ng-model="params.r"></input>
+			<label>standard deviation</label><input type="text" ng-model="params.stdev"></input>
+			<button ng-click="post_job()">Calculate</button>
+			{{status}}
+			<label>Price of Option</label><h5>{{result[1]|number:2}}</h5>
+			<hr>
+		</div>
+		<div class="six columns">
+			<label>Number of Sub-Tasks</label><input type="number" ng-model="num_tasks"></input>
+			<label>Number of Simulations per Sub-Task</label><input type="number" ng-model="params.num_simulations"></input>
+		</div>
+	</div>
+</div>

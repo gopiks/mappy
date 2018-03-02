@@ -1,0 +1,26 @@
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.1.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/jobs.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+
+
+<div ng-app="postJob" ng-controller="myCtrl" class="container">
+	<h2 class="title">Post a Job</h2><hr>
+	<textarea type='textarea' placeholder="Code for function..." class="u-full-width" id='func' ></textarea>
+	<textarea type='textarea'  placeholder="List of arguments..." class="u-full-width" id='args' ></textarea>
+	<textarea type='textarea'  placeholder="Reduce function.."   ng-model='reduce_func' class="u-full-width"></textarea>
+	<textarea type='textarea'  placeholder="Comma separated list of resource URLs.." ng-init='resources=""' ng-model='resources' class="u-full-width"></textarea>
+	<input type="text" placeholder="Job Name" ng-model="job_name"></input>
+	<input type='button' value='Post' ng-click='post_job()'/>
+	<a href="sample_jobs.html">Sample Jobs</a>
+	<p >Job ID:{{job_id}}</p>
+	<p id='job_status'>Job status:{{status}}</p>
+	<a href="/job/{{job_id}}/result" ng-show="status=='completed'">Result</a>
+</div>

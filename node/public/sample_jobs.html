@@ -1,0 +1,66 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+<script>
+
+
+</script>
+<div  class="container">
+	<h2 class="title">Sample Jobs for Mappy</h1><hr>
+	<h4>Cubes of first million numbers</h4>
+	<b>Map function</b>
+		<pre><code>
+start=arg[0];
+end=arg[1];
+sum=0;
+for (i=start;i&lt;end;i++) {sum=sum+i*i*i;}
+return parseInt(sum);
+		</code></pre>
+	<b>Arguments</b>
+		<pre><code>
+[[0,200000],[200000,400000],[400000,600000],[600000,800000],[800000,1000001]]
+		</code></pre>
+	<b>Reduce function</b>
+		<pre><code>
+(x,y)=>x+y
+		</code></pre>
+	<p>*this is only for illustration. Much more efficient algorithms exist.</p>
+	<hr>
+	<h4>Option Pricing Using Monte-Carlo Simulation</h4>
+	This option pricer is also available as a web-app <a href="/static/option_pricer.html">here</a>.<br>
+	<b>Map function</b>
+		<pre><code>
+sum=0;
+for (i=0;i<100000;i++) {
+	rnd=Math.exp(nrand()*arg["stdev"]*Math.sqrt(arg["time"])+arg["time"]*(arg["r"]-arg["stdev"]*arg["stdev"]/2.0))*arg["spot"];
+	if(rnd>arg["strike"]) sum=sum+rnd-arg["strike"];
+}
+return ([100000,Math.exp(-arg["time"]*arg["r"])*sum/100000]);
+		</code></pre>
+	<b>Arguments</b>
+		<pre><code>
+[{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0},
+{"stdev":0.1,"r":0.1,"spot":100.0,"strike":100.0,"time":1.0}]
+		</code></pre>
+	<b>Reduce function</b>
+	Reduce function takes counts and sums from each sub-task as a tuple and calculates global average.
+		<pre><code>
+(x,y)=>[(x[0])+(y[0]),(x[1]*x[0]+y[1]*y[0])/(x[0]+y[0])]
+		</code></pre>
+		
+	<b>Resources</b>
+	As Javascript does not come with normal distribution functions, we import our own library.
+		<pre><code>
+/resources/norm_dist.js
+		</code></pre>	
+	<p>*this is only for illustration. Much more efficient algorithms exist.</p>
+	<hr>	
+</div>
