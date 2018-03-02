@@ -10,7 +10,7 @@
 <div ng-app="optionPricer" ng-controller="myCtrl" class="container">
 	<h2 class="title">Option Pricer Using Monte-Carlo Simulation</h1><hr>
 	
-	<p>This app creates {{num_tasks|number:0}} jobs with {{params.num_simulations|number:0}} simulations each (total {{num_tasks*params.num_simulations|number:0}} simulations) to price a call option. There are closed form, efficient solutions for option pricing. This simulation based pricing is only for illustration.</p>
+	<p>This app creates {{num_tasks|number:0}} jobs with {{params.num_simulations|number:0}} simulations each (total {{num_tasks*params.num_simulations|number:0}} simulations) to price a call option. There are closed form, efficient solutions for option pricing. This simulation based pricing is only for illustration. <a href="https://en.wikipedia.org/wiki/Monte_Carlo_methods_for_option_pricing">Read more</a></p>
 	<div class="row">
 		<div class="six columns">
 			<label>spot</label><input type="text" ng-model="params.spot"></input>

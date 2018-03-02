@@ -96,7 +96,7 @@ app.controller("myCtrl", function($scope) {
 			}catch(err) {
 				
 				$scope.error_jobs.push([job_name,job_id,err]);
-				$.post("/job/"+job_id+"/error",{"arg_id":arg_id},function(){},"json");
+				$.post(host+"/job/"+job_id+"/error",{"arg_id":arg_id},function(){},"json");
 				$scope.$apply();
 			}
 			if($scope.error_jobs.length<20){
