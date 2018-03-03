@@ -19,7 +19,7 @@
 			<label>interest rate</label><input type="text" ng-model="params.r"></input>
 			<label>standard deviation</label><input type="text" ng-model="params.stdev"></input>
 			<button ng-click="post_job()">Calculate</button>
-			{{status}}
+			{{status}}({{percentage|number:1}}% completed)
 			<label>Price of Option</label><h5>{{result[1]|number:2}}</h5>
 			<hr>
 		</div>

@@ -28,7 +28,12 @@ app.controller("myCtrl", function($scope) {
 		success=function(data){
 
 			$scope.status=data['status'];
+			if (data['counts']==undefined || data['counts']['completed']==undefined)
+				$scope.percentage=0.0;
+			else 
+				$scope.percentage=100*data['counts']['completed']/parseFloat($scope.num_tasks);
 			if($scope.status!='completed') {setTimeout($scope.job_status, 500);}
+
 			else{
 				$.get('/job/'+$scope.job_id+'/result',function(result){
 					$scope.result=(result);
