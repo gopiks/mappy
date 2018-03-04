@@ -1,0 +1,25 @@
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.1.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/pi_nilakantha.js"></script>
+<div ng-app="optionPricer" ng-controller="myCtrl" class="container">
+	<h2 class="title">Value of Pi Using Nilakantha Summation</h1><hr>
+	
+	<p>This app creates {{num_tasks|number:0}} jobs with {{num_simulations|number:0}} terms each (total {{num_tasks*num_simulations|number:0}} terms) to find the value of PI using Nilakantha Summation. <a href="https://www.researchgate.net/publication/283579663_Nilakantha's_accelerated_series_for_pi">Read more</a></p>
+	<div class="row">
+		<div class="tweleve columns">
+			<label>Number of Sub-Tasks</label><input type="number" ng-model="num_tasks"></input>
+			<label>Number of Terms per Sub-Task</label><input type="number" ng-model="num_simulations"></input>
+			<button ng-click="post_job()">Calculate</button>
+			{{status}}({{percentage|number:1}}% completed)
+			<label>Value of PI</label><h5>{{4*result+3|number:15}}</h5>
+			<hr>
+		</div>
+
+	</div>
+</div>

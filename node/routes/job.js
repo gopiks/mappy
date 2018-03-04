@@ -177,11 +177,12 @@ router.get('/:object_id/result', function (req, res, next) {
   var condition = {'_id':req.params.object_id};
   api.findOne(condition).then(result => {
 
-    if (result.status != 'completed') {
+    /*if (result.status != 'completed') {
       res.json(null)
-    } 
+    } */
     var _result = [];
     result.args.forEach(function (value) {
+		if(value.status=='completed')
       _result.push(value.result)
       
     });
