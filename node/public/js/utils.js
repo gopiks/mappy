@@ -10,7 +10,7 @@ pubnub = new PubNub({
 post_job=function(func,args,reduce_func,job_name,resources,job_status,scope){
 		
 	success=function(data){
-		scope.job_id=(data)	;
+		scope['job_id']=(data)	;
 		job_status();
 		pubnub.publish(
 			{
@@ -25,7 +25,6 @@ post_job=function(func,args,reduce_func,job_name,resources,job_status,scope){
 					alert("error:"+response);
 					console.log(status)
 				} else {
-					alert("Job Posted");
 					console.log("message Published w/ timetoken", response.timetoken)
 				}
 			}
@@ -41,6 +40,10 @@ post_job=function(func,args,reduce_func,job_name,resources,job_status,scope){
 				contentType: "application/json; charset=utf-8",
 				success: success
 			});
-	scope.$apply();
+	try {
+		scope.$apply();
+	}catch(e){
+	}
+	
 	
 } 

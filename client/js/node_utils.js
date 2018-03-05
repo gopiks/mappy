@@ -16,7 +16,6 @@ function Import(path)
     request.send();
 
     source = request.responseText;
-
     eval(source);
 	paths.push(path);
     return;
@@ -33,7 +32,7 @@ function load_res(job_id,host){
 			resources1=(resources);
 			if(resources1 == "" | resources1=="null" | resources1==undefined ) return;
 			if (resources1.length==0) return;
-			for (res in resources1) Import(resources1[res]);
+			for (res in resources1) {Import(resources1[res]);}
         }
     });
 

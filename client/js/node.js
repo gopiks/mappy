@@ -45,7 +45,7 @@ app.controller("myCtrl", function($scope) {
 	});
 
 
-    $scope.post_result=function(job_name,job_id,arg_id,result,job_time,host){
+    $scope.post_result=function(job_name,job_id,arg_id,result,job_time,job_effort,host){
 		try {		
 			result_success=function(data){
 				if (data=true){
@@ -60,7 +60,7 @@ app.controller("myCtrl", function($scope) {
 				contentType: "application/json; charset=utf-8",
 				success: result_success
 			});
-			$scope.processed_jobs.push([job_name,job_id,job_time]);
+			$scope.processed_jobs.push([job_name,job_id,job_time,job_effort]);
 			
 		}catch(err) {
 			$scope.error_jobs.push([job_name,job_id,err]);
@@ -68,7 +68,14 @@ app.controller("myCtrl", function($scope) {
 		}
 		$scope.$apply();
 	}
-	
+	$scope.proc_speed=function(){
+		t1 = performance.now();
+		sum=0;
+		for (i=0;i<1000000;i++) sum=1000*1000;
+		t2 = performance.now();
+		return 1000000/(t2-t1);
+	}
+	speed=$scope.proc_speed();
 	$scope.get_new_sub_task=function(job_id,host){
 		if (!($scope.working)) return;
 		success=function(data){
@@ -87,12 +94,13 @@ app.controller("myCtrl", function($scope) {
 				
 				arg_id=data["arg_id"];
 				func=Function("arg",data["func"]);
-				var d = new Date();var t1 = d.getTime()
+				var t1 = performance.now();
 				result=func(arg);
-				d = new Date();var t2 = d.getTime()
+				var t2 = performance.now();
 				job_time=t2-t1;
-				
-				$scope.post_result(job_name,job_id,arg_id,result,job_time,host);
+				job_effort=(job_time)*speed;
+
+				$scope.post_result(job_name,job_id,arg_id,result,job_time,job_effort,host);
 			}catch(err) {
 				
 				$scope.error_jobs.push([job_name,job_id,err]);
@@ -102,7 +110,7 @@ app.controller("myCtrl", function($scope) {
 			if($scope.error_jobs.length<20){
 				
 				setTimeout(function(){
-					$scope.get_new_sub_task(job_id,host);}, 500);
+					$scope.get_new_sub_task(job_id,host);}, 5);
 			}
 			else {
 				alert("Stopped because of too many errors. Refresh the page to start processing");

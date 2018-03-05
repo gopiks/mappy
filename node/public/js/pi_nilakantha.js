@@ -5,8 +5,8 @@ app.controller("myCtrl", function($scope) {
 	$scope.job_id=null;
 
 	resources=[];
-	$scope.num_tasks=10;
-	$scope.num_simulations=100000;
+	$scope.num_tasks=20;
+	$scope.num_simulations=20000;
 	func='sum=0;for (i=arg[0];i<arg[1];i++) {x=i%2;sum=sum+Math.pow(-1,x)/((2*i+2)*(2*i+3)*(2*i+4));} return sum;';
 
 	reduce_func="(x,y)=>x+y";

@@ -29,9 +29,9 @@
 		<button value='' class="button round_btn" ng-show="working" ng-click='working=false;'>&#9612;&#9612;</button>
 		<div class="row">
 			<table class="six columns">
-				<tr><th>Ids for processed jobs</th><th>Names</th><th>Time in milliseconds</th></tr>
+				<tr><th>Ids for processed jobs</th><th>Names</th><th>Time in milliseconds</th><th>Num Operations</th></tr>
 				<tr ng-repeat="job in processed_jobs track by $index">
-					<td>{{job[1]}}</td><td>{{job[0]}}</td><td>{{job[2]}}</td>
+					<td>{{job[1]}}</td><td>{{job[0]}}</td><td>{{job[2]|number:0}}</td><td>{{job[3]|number:0}}</td>
 				</tr>
 			</table>
 			<table  class="six columns">
