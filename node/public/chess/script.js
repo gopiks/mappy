@@ -101,7 +101,7 @@ var foundBestMove=function(bestMove){
 
     $('#position-count').text(positionCount);
     $('#time').text(moveTime/1000 + 's');
-	if(moveTime>10000) depth=Math.max(depth-1,1);
+	if(moveTime>10000) depth=Math.max(depth-1,3);
 	if(moveTime<1000) depth=Math.min(depth+1,10);
 	 $('#search-depth').text(depth);
     $('#positions-per-s').text(positionsPerS);
