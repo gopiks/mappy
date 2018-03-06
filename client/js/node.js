@@ -3,7 +3,7 @@ app.controller("myCtrl", function($scope) {
 	$scope.processed_jobs=[];
 	$scope.in_process_jobs=[];
 	$scope.error_jobs=[];
-	$scope.working=false;
+	$scope.working=true;
 	$scope.sub_key="sub-c-037fce1e-0c77-11e8-941f-7e2964818bdb";
 	$scope.pubnub = new PubNub({
 		subscribeKey: $scope.sub_key,
@@ -60,7 +60,7 @@ app.controller("myCtrl", function($scope) {
 				contentType: "application/json; charset=utf-8",
 				success: result_success
 			});
-			$scope.processed_jobs.push([job_name,job_id,job_time,job_effort]);
+			$scope.processed_jobs.push([job_name,job_id+"_"+arg_id,job_time,job_effort]);
 			
 		}catch(err) {
 			$scope.error_jobs.push([job_name,job_id,err]);
@@ -125,17 +125,18 @@ app.controller("myCtrl", function($scope) {
 
 		$.get(host+'/job/'+job_id,success);		
 	}
+	$scope.well_known_nodes=["http://localhost:3000","http://mappy.tech:3000"];
 	$scope.new_job=function(host){
-		if (host==undefined) host="http://localhost:3000";
+		if (host==undefined) host=$scope.well_known_nodes[Math.floor(Math.random()*$scope.well_known_nodes.length)];
 		if (!($scope.working)) return;
 		success=function(data){
-			if (data==null) {$scope.no_jobs=true;return;}
-			if (data=="") {$scope.no_jobs=true;return;}
-			if (data==undefined) {$scope.no_jobs=true;return;}
+			if (data==null) {$scope.no_jobs=true;setTimeout($scope.new_job,100);return;}
+			if (data=="") {$scope.no_jobs=true;setTimeout($scope.new_job,100);return;}
+			if (data==undefined) {$scope.no_jobs=true;setTimeout($scope.new_job,100);return;}
 			data=(data);
-			if (data==null) {$scope.no_jobs=true;return;}
-			if (data=="") {$scope.no_jobs=true;return;}
-			if (data==undefined) {$scope.no_jobs=true;return;}	
+			if (data==null) {$scope.no_jobs=true;setTimeout($scope.new_job,100);return;}
+			if (data=="") {$scope.no_jobs=true;setTimeout($scope.new_job,100);return;}
+			if (data==undefined) {$scope.no_jobs=true;setTimeout($scope.new_job,100);return;}	 	
 			load_res(data,host);
 			$scope.get_new_sub_task(data,host);
 		}

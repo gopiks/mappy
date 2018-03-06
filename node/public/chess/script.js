@@ -1,6 +1,6 @@
 
 
-
+var depth=3;
 var board,
     game = new Chess();
 
@@ -46,7 +46,7 @@ var job_status=function(){
 	
 
 /*The "AI" part starts here */
-var minimaxRoot =function(depth, game, isMaximisingPlayer) {
+var minimaxRoot =function(depth1, game, isMaximisingPlayer) {
 
     newGameMoves = game.ugly_moves();
     var bestMoveFound;
@@ -56,7 +56,7 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     for(var i = 0; i < newGameMoves.length; i++) {
         var newGameMove = newGameMoves[i];
         game.ugly_move(newGameMove);
-        args.push( [depth - 1, game.fen(), -10000, 10000, !isMaximisingPlayer]);
+        args.push( [depth1 - 1, game.fen(), -10000, 10000, !isMaximisingPlayer]);
 		game.undo();
 	}
 	func='return minimax_entry(arg);';
@@ -101,6 +101,9 @@ var foundBestMove=function(bestMove){
 
     $('#position-count').text(positionCount);
     $('#time').text(moveTime/1000 + 's');
+	if(moveTime>10000) depth=Math.max(depth-1,1);
+	if(moveTime<1000) depth=Math.min(depth+1,10);
+	 $('#search-depth').text(depth);
     $('#positions-per-s').text(positionsPerS);
     game.ugly_move(bestMove);
     board.position(game.fen());
@@ -114,7 +117,7 @@ var getBestMove = function (game) {
         alert('Game over');
     }
 
-    var depth = parseInt($('#search-depth').find(':selected').text());
+    //var depth = parseInt($('#search-depth').find(':selected').text());
 
     d= new Date().getTime();
     minimaxRoot(depth, game, true);

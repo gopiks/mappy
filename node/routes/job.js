@@ -74,13 +74,23 @@ router.get('/', function (req, res, next) {
 router.get('/:object_id', function (req, res, next) {
   //var data = {'_id':req.params.object_id};
   api.findById(req.params.object_id).then(result => {
-	arg_id=result['args'].findIndex(x=>(x['status']!='completed'));
-	    if (arg_id==null || arg_id==undefined || arg_id==-1) return null;
-    arg=result['args'][arg_id]['arg'];
-    result['args'][arg_id]['status']='submitted';
-    
-    
-    //mongo.mappy.jobs.update({'_id':ObjectId(job['_id'])},{'$set':{'args':job['args'],'status': 'submitted'}})
+	arg_id_not_completed=null;
+	args=result['args'];
+	for (i = 0; i < args.length; i++) { 
+		if(args[i]['status']!='completed')
+		arg_id_not_completed=i;
+	}
+	arg_id_not_completed=args.findIndex(x=>(x['status']!='completed'));
+	if (arg_id_not_completed==-1) {res.json(null);return;}
+	arg_id_stored=args.findIndex(x=>(x['status']=='stored'));
+	
+	if (arg_id_stored==null || arg_id_stored==undefined || arg_id_stored==-1) arg_id=arg_id_not_completed;
+	else arg_id=arg_id_stored;
+	arg=args[arg_id]['arg'];
+    args[arg_id]['status']='submitted';
+    result['args']=args;
+	//result.save();
+    api.update({'_id':req.params.object_id},{'args':args,'status': 'submitted'})
 
 	result['args']=[];
 	result['arg_id']=arg_id;

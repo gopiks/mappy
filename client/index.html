@@ -17,12 +17,12 @@
 <div ng-app="nodeApp" ng-controller="myCtrl" class="container">
 	  	  <h2 class="title">
 		<a href="/"> <img href="/" src="img/icon.png" height=40></img></a>
-		<i>mappy</i> client </h2>
+		<i>mappy</i> worker </h2>
 		
 
 		<hr>
 		<h5><b>Computing by the community and for the community</b></h5>
-		<select style="height:50px;">
+		<select style="height:50px;display:none">
 		  <option value="volvo" >Test Project</option>
 		</select>
 		<button value='' class="button round_btn" ng-show="!working" ng-click='working=true;new_job()'>&#9658;</button>
