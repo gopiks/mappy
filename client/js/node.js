@@ -1,9 +1,19 @@
 var app = angular.module("nodeApp", []); 
+
+
 app.controller("myCtrl", function($scope) {
 	$scope.processed_jobs=[];
 	$scope.in_process_jobs=[];
 	$scope.error_jobs=[];
+	$scope.time_contri_session=0;
+	$scope.compute_contri_session=0;
 	$scope.working=true;
+	$scope.time_contributed=getCookie('time_contributed');
+	if ($scope.time_contributed=='') $scope.time_contributed=0;
+	else $scope.time_contributed=parseInt($scope.time_contributed);
+	$scope.compute_contributed=getCookie('compute_contributed');
+	if ($scope.compute_contributed=='') $scope.compute_contributed=0.0;
+	else $scope.compute_contributed=parseFloat($scope.compute_contributed);
 	$scope.sub_key="sub-c-037fce1e-0c77-11e8-941f-7e2964818bdb";
 	$scope.pubnub = new PubNub({
 		subscribeKey: $scope.sub_key,
@@ -99,7 +109,17 @@ app.controller("myCtrl", function($scope) {
 				var t2 = performance.now();
 				job_time=t2-t1;
 				job_effort=(job_time)*speed;
-
+				$scope.time_contri_session+=job_time;
+				$scope.compute_contri_session+=job_time;
+				$scope.time_contributed=getCookie('time_contributed');
+				if ($scope.time_contributed=='') $scope.time_contributed=job_time;
+				else $scope.time_contributed=parseInt($scope.time_contributed)+job_time;
+				$scope.compute_contributed=getCookie('compute_contributed');
+				if ($scope.compute_contributed=='') $scope.compute_contributed=job_effort;
+				else $scope.compute_contributed=parseFloat($scope.compute_contributed)+job_effort;
+				setCookie('time_contributed',$scope.time_contributed,1000);
+				setCookie('compute_contributed',$scope.compute_contributed,1000);
+				
 				$scope.post_result(job_name,job_id,arg_id,result,job_time,job_effort,host);
 			}catch(err) {
 				
