@@ -8,7 +8,60 @@
 	text-align:center;
 	padding-left:10px;
 	padding-right:10px;
+	color:white ;
 }
+body{
+	margin:0;
+	background:linear-gradient(#3523ae,#1c0446);
+	color: rgba(255, 255, 255, 0.88);
+	   background-image:url(../img/world.png);
+	   background-image: url(../img/world.png), linear-gradient(#3523ae,#1c0446); /* W3C */
+
+   background-repeat:no-repeat;
+
+   background-size:cover;
+
+}
+
+.fact{
+	display:inline;
+	float:left;
+	margin:5px;
+	border: 2px grey solid;
+	padding:5px;
+	text-align:center;
+	border-radius:3px;
+	font-size:35;
+	color:#eee;
+}
+.fact .label{
+	color:#eee;
+	font-size:12;
+	font-weight:150%;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    z-index: 1;
+    font-weight: 600;
+    pointer-events: none;
+	color:white;
+}
+
+header .logo {
+    text-align: left;
+}
+
 .container {
 	margin-top: 50px;
 }

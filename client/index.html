@@ -13,24 +13,68 @@
 <link rel="stylesheet" href="css/common.css">
 
 
-<body style="margin:0">
-<div ng-app="nodeApp" ng-controller="myCtrl" class="container">
-	  	  <h2 class="title">
+<body style="">
+<header>
+
+<h2 id="logo" class="title">
 		<a href="/"> <img href="/" src="img/icon.png" height=40></img></a>
 		<i>mappy</i> worker </h2>
+		<a href="http://mappy.tech" class="button" style="color:white;text-align:right;">Info </a>
+</header>
+<div ng-app="nodeApp" ng-controller="myCtrl" class="container">
+	  	  
 		
 
 		<hr>
-		<h5><b>Computing by the community and for the community</b></h5>
+		<p style="text-align:center"><b>Computing by the community and for the community</b></p>
 		<select style="height:50px;display:none">
 		  <option value="volvo" >Test Project</option>
 		</select>
-		<button value='' class="button round_btn" ng-show="!working" ng-click='working=true;new_job()'>&#9658;</button>
-		<button value='' class="button round_btn" ng-show="working" ng-click='working=false;'>&#9612;&#9612;</button>
-		<p>Time contributed in this session: {{time_contri_session/1000.0|number :1}}s</p>
-		<p>Compute units contributed in this session: {{compute_contri_session|number:0}}</p>
-		<p>Total time contributed: {{time_contributed/1000.0|number :1}}s</p>
-		<p>Total compute contributed: {{compute_contributed|number:0}}</p>
+		
+		<!--<div id="factBalanceContainer" class="fact">
+                <div id="factBalanceContainerInner">
+                    <div class="label">
+                        <span>Time contributed in this session</span>
+                    </div>
+                    <div>
+						<span id="factBalance">{{time_contri_session/1000.0|number :1}}s
+						</span>
+                    </div>
+                </div>
+            </div>
+		<div id="factBalanceContainer" class="fact">
+                <div id="factBalanceContainerInner">
+                    <div class="label">
+                        <span>Compute units contributed in this session</span>
+                    </div>
+                    <div>
+						<span id="factBalance">{{compute_contri_session|number:0}}</s
+						</span>
+                    </div>
+                </div>
+            </div> -->
+		<div class="row">
+			<div id="" class="fact">
+                    <div class="label">
+                        <span>TIME CONTRIBUTED</span>
+                    </div>
+                    <div>
+						<span id="factBalance">{{time_contributed/1000.0|number :1}}s</s
+						</span>
+                    </div>
+            </div> 
+			<div id="" class="fact">
+                    <div class="label">
+                        <span>COMPUTE CONTRIBUTED</span>
+                    </div>
+                    <div>
+						<span id="factBalance">{{compute_contributed|number:0}}</s
+						</span>
+                    </div>
+            </div>	
+			<button style="margin:auto" value='' class="button round_btn" ng-show="!working" ng-click='working=true;new_job()'>&#9658;</button>
+			<button style="margin:auto" value='' class="button round_btn" ng-show="working" ng-click='working=false;'>&#9612;&#9612;</button>
+		</div>
 		<div class="row">
 			<table class="six columns">
 				<tr><th>Ids for processed jobs</th><th>Names</th><th>Time in milliseconds</th><th>Num Operations</th></tr>
