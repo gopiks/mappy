@@ -40,25 +40,14 @@ body{
 	font-weight:150%;
 }
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    z-index: 1;
-    font-weight: 600;
-    pointer-events: none;
-	color:white;
+.header {
+
+    padding: 5px !important;
+
+	
 }
 
-header .logo {
+.header .logo {
     text-align: left;
 }
 

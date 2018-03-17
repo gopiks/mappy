@@ -1,3 +1,4 @@
+<html>
 <script
   src="http://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -8,24 +9,24 @@
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.1.js"></script>
 <script src="js/node_utils.js"></script>
 <script src="js/node.js"></script> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"/>
 
-<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/common.css"/>
 
 
-<body style="">
-<header>
-
-<h2 id="logo" class="title">
-		<a href="/"> <img href="/" src="img/icon.png" height=40></img></a>
-		<i>mappy</i> worker </h2>
-		<a href="http://mappy.tech" class="button" style="color:white;text-align:right;">Info </a>
-</header>
-<div ng-app="nodeApp" ng-controller="myCtrl" class="container">
-	  	  
+<body ng-app="nodeApp" ng-controller="myCtrl"  style="">
+<div class="header row">
+	<h2 style="float:left;margin:0" id="logo" class="title"><a href="/"> <img href="/" src="img/icon.png" height=40></img></a>	<i>mappy</i> worker </h2>
+	<div style="color:white;text-align:right;">
+		<a href="http://mappy.tech" style="color:white;font-size:14px;height:50px;margin:0;" class="button" style="color:white;float:right;">Info </a>
+		<button style="color:white;float:right;" value='' class="button round_btn" ng-show="!working" ng-click='working=true;new_job()'>&#9658;</button>
+		<button style="color:white;float:right;" value='' class="button round_btn" ng-show="working" ng-click='working=false;'>&#9612;&#9612;</button>
+	</div>
+	
+</div>
+<hr style="margin-top:0">
+<div class="container" style="text-align:center">
 		
-
-		<hr>
 		<p style="text-align:center"><b>Computing by the community and for the community</b></p>
 		<select style="height:50px;display:none">
 		  <option value="volvo" >Test Project</option>
@@ -53,7 +54,7 @@
                     </div>
                 </div>
             </div> -->
-		<div class="row">
+		<div class="row" style="text-align:center;margin:auto">
 			<div id="" class="fact">
                     <div class="label">
                         <span>TIME CONTRIBUTED</span>
@@ -68,12 +69,11 @@
                         <span>COMPUTE CONTRIBUTED</span>
                     </div>
                     <div>
-						<span id="factBalance">{{compute_contributed|number:0}}</s
+						<span id="factBalance">{{compute_contributed/1000000000.0|number:1}}G</s
 						</span>
                     </div>
             </div>	
-			<button style="margin:auto" value='' class="button round_btn" ng-show="!working" ng-click='working=true;new_job()'>&#9658;</button>
-			<button style="margin:auto" value='' class="button round_btn" ng-show="working" ng-click='working=false;'>&#9612;&#9612;</button>
+			
 		</div>
 		<div class="row">
 			<table class="six columns">
@@ -92,3 +92,4 @@
 
 </div>
 </body>
+</html>
